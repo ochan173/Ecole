@@ -6,14 +6,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import static etudiant.CoursSession.SAUT_LIGNE;
+import static etudiant.DateUtil.creerDate;
 
 public class TestRapportInscription extends TestCase {
     public void testRapportInscription() {
-        CoursSession coursSession = new CoursSession("Philo", "101", creerDate(2019, 2, 7));
+        CoursSession coursSession = CoursSession.CreerCoursSession("Philo", "101", creerDate(2019, 2, 7), 3);
 
-        Etudiant etudiant1 = new Etudiant("Arianne f.", 9);
-        Etudiant etudiant2 = new Etudiant("Paul n.", 6);
+        Etudiant etudiant1 = new Etudiant("Arianne f.", 9, "FR");
+        Etudiant etudiant2 = new Etudiant("Paul n.", 6, "CA");
 
         coursSession.inscrire(etudiant1);
         coursSession.inscrire(etudiant2);
@@ -24,16 +24,5 @@ public class TestRapportInscription extends TestCase {
                 + RapportInscription.PIEDPAGE_RAPPORT_INSCRIPTION
                 + "2" + RapportInscription.SAUT_LIGNE, new RapportInscription(coursSession).getRapportInscription());
 
-    }
-
-    private Date creerDate(int p_annee, int p_mois, int p_jour) {
-        GregorianCalendar calendrier = new GregorianCalendar();
-        calendrier.clear();
-
-        calendrier.set(Calendar.YEAR, p_annee);
-        calendrier.set(Calendar.MONTH, p_mois);
-        calendrier.set(Calendar.DAY_OF_MONTH, p_jour);
-
-        return calendrier.getTime();
     }
 }

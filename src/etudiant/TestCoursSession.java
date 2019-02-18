@@ -13,7 +13,7 @@ public class TestCoursSession extends TestCase {
     public void setUp() {
         CoursSession.reinitialiserCptCours();
         m_date = creerDate(2019, 2, 7);
-        m_coursSession = new CoursSession("Philo", "101", m_date);
+        m_coursSession = CoursSession.CreerCoursSession("Philo", "101", m_date,3);
     }
 
     public void testCreer() {
@@ -27,7 +27,7 @@ public class TestCoursSession extends TestCase {
 
     public void testNombreCours() {
         assertEquals(1, m_coursSession.getNbCours());
-        m_coursSession = new CoursSession("Francais", "102", m_date);
+        m_coursSession =  CoursSession.CreerCoursSession("Francais", "102", m_date, 4);
         assertEquals(2, m_coursSession.getNbCours());
 
         CoursSession.reinitialiserCptCours();
@@ -35,17 +35,19 @@ public class TestCoursSession extends TestCase {
     }
 
     public void testInscrireEtudiant() {
+        CoursSession coursMath = CoursSession.CreerCoursSession("Math", "101", m_date, 2);
+        Etudiant etudiant1 = new Etudiant("Olivier Chan", 12, "CA");
+        assertEquals(12, etudiant1.getNbUnites());
+        coursMath.inscrire(etudiant1);
+        assertEquals(14, etudiant1.getNbUnites());
 
-        Etudiant etudiant1 = new Etudiant("Olivier Chan", 12);
-        m_coursSession.inscrire(etudiant1);
+        assertEquals(etudiant1, coursMath.getEtudiant(0));
 
-        assertEquals(etudiant1, m_coursSession.getEtudiant(0));
-
-        Etudiant etudiant2 = new Etudiant("Patrick n.", 9);
-        m_coursSession.inscrire(etudiant2);
-        assertEquals(2, m_coursSession.getNbEleves());
-        assertEquals(etudiant1, m_coursSession.getEtudiant(0));
-        assertEquals(etudiant2, m_coursSession.getEtudiant(1));
+        Etudiant etudiant2 = new Etudiant("Patrick n.", 9, "US");
+        coursMath.inscrire(etudiant2);
+        assertEquals(2, coursMath.getNbEleves());
+        assertEquals(etudiant1, coursMath.getEtudiant(0));
+        assertEquals(etudiant2, coursMath.getEtudiant(1));
 
 
     }

@@ -4,16 +4,22 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class DateUtil {
+/**
+ * Classe pour créer une date
+ *
+ * @author Olivier Chan
+ * @author David Goulet
+ */
+class DateUtil {
 
     private DateUtil() { }
 
     /**
-     *
-     * @param p_annee
+     * Méthode pour créer une date
+     * @param p_annee Année
      * @param p_mois Mois de l'année commencant à 0
-     * @param p_jour
-     * @return
+     * @param p_jour Jour du mois
+     * @return une date
      */
      static Date creerDate(int p_annee, int p_mois, int p_jour) {
         GregorianCalendar calendrier = new GregorianCalendar();
