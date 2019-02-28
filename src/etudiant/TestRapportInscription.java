@@ -1,14 +1,19 @@
 package etudiant;
 
 import junit.framework.TestCase;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-
 import static etudiant.DateUtil.creerDate;
 
+/**
+ * Classe de tests pour la création d'un rapport d'inscription
+ *
+ * @author Olivier Chan
+ * @author David Goulet
+ */
 public class TestRapportInscription extends TestCase {
+
+    /**
+     * Tests pour un rapport d'inscription
+     */
     public void testRapportInscription() {
         CoursSession coursSession = CoursSession.CreerCoursSession("Philo", "101", creerDate(2019, 2, 7), 3);
 

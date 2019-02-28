@@ -2,7 +2,17 @@ package etudiant;
 
 import junit.framework.TestCase;
 
+/**
+ * Classe de tests pour un Étudiant
+ *
+ * @author Olivier Chan
+ * @author David Goulet
+ */
 public class TestEtudiant extends TestCase {
+
+    /**
+     * Suite de tests pour la création d'un étudiant
+     */
     public void testCreer() {
         String nomEtudiant = "Olivier Chan";
         Etudiant etudiant = new Etudiant(nomEtudiant, 12, "CA");

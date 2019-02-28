@@ -39,10 +39,6 @@ class CoursSession {
         return cours;
     }
 
-    public int getUnite() {
-        return m_unite;
-    }
-
     private void setUnite(int p_unite) {
         this.m_unite = p_unite;
     }

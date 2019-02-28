@@ -1,14 +1,21 @@
 package etudiant;
 
 import junit.framework.TestCase;
-
 import java.util.Calendar;
 import java.util.Date;
-
 import static etudiant.DateUtil.creerDate;
 
+/**
+ * Classe pour la création d'une date
+ *
+ * @author Olivier Chan
+ * @author David Goulet
+ */
 public class TestDateUtil extends TestCase {
 
+    /**
+     * Suite de tests pour la création d'une date
+     */
     public void testCreer() {
         Date date = creerDate(2019, 2, 14);
         Calendar calendar = Calendar.getInstance();
