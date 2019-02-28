@@ -1,4 +1,4 @@
-package etudiant;
+package ecole.etudiant;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.GregorianCalendar;
  * @author Olivier Chan
  * @author David Goulet
  */
-class DateUtil {
+public class DateUtil {
 
     private DateUtil() { }
 
@@ -21,7 +21,7 @@ class DateUtil {
      * @param p_jour Jour du mois
      * @return une date
      */
-     static Date creerDate(int p_annee, int p_mois, int p_jour) {
+     public static Date creerDate(int p_annee, int p_mois, int p_jour) {
         GregorianCalendar calendrier = new GregorianCalendar();
         calendrier.clear();
 

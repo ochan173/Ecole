@@ -1,15 +1,11 @@
-package etudiant;
+package ecole.etudiant;
 
+import ecole.rapport.TestRapportCours;
+import ecole.rapport.TestRapportInscription;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Classe de tests complet à exécuter
- *
- * @author Olivier Chan
- * @author David Goulet
- */
-public class TestComplet extends TestCase {
+public class TestCompletEtudiant extends TestCase {
     /**
      * Suite des tests exécutés
      * @return une suite de tests
@@ -18,8 +14,7 @@ public class TestComplet extends TestCase {
         TestSuite testSuite = new TestSuite();
         testSuite.addTestSuite(TestEtudiant.class);
         testSuite.addTestSuite(TestCoursSession.class);
-        testSuite.addTestSuite(TestRapportInscription.class);
         testSuite.addTestSuite(TestDateUtil.class);
         return testSuite;
     }
-}
+    }

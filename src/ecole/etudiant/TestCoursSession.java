@@ -1,10 +1,10 @@
-package etudiant;
+package ecole.etudiant;
 
 import junit.framework.TestCase;
 
 import java.util.Date;
 
-import static etudiant.DateUtil.creerDate;
+import static ecole.etudiant.DateUtil.creerDate;
 
 /**
  * Classe de test pour les cours session
@@ -22,7 +22,7 @@ public class TestCoursSession extends TestCase {
     public void setUp() {
         CoursSession.reinitialiserCptCours();
         m_date = creerDate(2019, 2, 7);
-        m_coursSession = CoursSession.CreerCoursSession("Philo", "101", m_date,3);
+        m_coursSession = CoursSession.creerCoursSession("Philo", "101", m_date,3);
     }
 
     /**
@@ -42,7 +42,7 @@ public class TestCoursSession extends TestCase {
      */
     public void testNombreCours() {
         assertEquals(1, m_coursSession.getNbCours());
-        m_coursSession =  CoursSession.CreerCoursSession("Francais", "102", m_date, 4);
+        m_coursSession =  CoursSession.creerCoursSession("Francais", "102", m_date, 4);
         assertEquals(2, m_coursSession.getNbCours());
 
         CoursSession.reinitialiserCptCours();
@@ -53,7 +53,7 @@ public class TestCoursSession extends TestCase {
      * Série de tests pour inscrire un étudiant à des cours
      */
     public void testInscrireEtudiant() {
-        CoursSession coursMath = CoursSession.CreerCoursSession("Math", "101", m_date, 2);
+        CoursSession coursMath = CoursSession.creerCoursSession("Math", "101", m_date, 2);
         Etudiant etudiant1 = new Etudiant("Olivier Chan", 12, "CA");
         assertEquals(12, etudiant1.getNbUnites());
         coursMath.inscrire(etudiant1);
@@ -69,7 +69,4 @@ public class TestCoursSession extends TestCase {
 
 
     }
-
-
-
 }

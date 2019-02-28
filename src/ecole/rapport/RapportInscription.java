@@ -1,4 +1,8 @@
-package etudiant;
+package ecole.rapport;
+
+import ecole.etudiant.CoursSession;
+import ecole.etudiant.Etudiant;
+import static ecole.rapport.ConstantesRapport.SAUT_LIGNE;
 
 /**
  * Création d'un rapport pour les inscriptions d'un cours
@@ -7,11 +11,6 @@ package etudiant;
  * @author David Goulet
  */
 class RapportInscription {
-    /**
-     * Saut de ligne
-     */
-    static final String SAUT_LIGNE =  System.getProperty("line.separator");
-
     /**
      * En-tête du rapport
      */

@@ -1,7 +1,10 @@
-package etudiant;
+package ecole.rapport;
 
+import ecole.etudiant.CoursSession;
+import ecole.etudiant.Etudiant;
 import junit.framework.TestCase;
-import static etudiant.DateUtil.creerDate;
+import static ecole.etudiant.DateUtil.creerDate;
+import static ecole.rapport.ConstantesRapport.SAUT_LIGNE;
 
 /**
  * Classe de tests pour la création d'un rapport d'inscription
@@ -15,7 +18,7 @@ public class TestRapportInscription extends TestCase {
      * Tests pour un rapport d'inscription
      */
     public void testRapportInscription() {
-        CoursSession coursSession = CoursSession.CreerCoursSession("Philo", "101", creerDate(2019, 2, 7), 3);
+        CoursSession coursSession = CoursSession.creerCoursSession("Philo", "101", creerDate(2019, 2, 7), 3);
 
         Etudiant etudiant1 = new Etudiant("Arianne f.", 9, "FR");
         Etudiant etudiant2 = new Etudiant("Paul n.", 6, "CA");
@@ -24,10 +27,11 @@ public class TestRapportInscription extends TestCase {
         coursSession.inscrire(etudiant2);
 
         assertEquals(RapportInscription.ENTETE_RAPPORT_INSCRIPTION
-                + "Arianne f." + RapportInscription.SAUT_LIGNE
-                + "Paul n." + RapportInscription.SAUT_LIGNE
+                + "Arianne f." + SAUT_LIGNE
+                + "Paul n." + SAUT_LIGNE
                 + RapportInscription.PIEDPAGE_RAPPORT_INSCRIPTION
-                + "2" + RapportInscription.SAUT_LIGNE, new RapportInscription(coursSession).getRapportInscription());
+                + "2" + SAUT_LIGNE, new RapportInscription(coursSession).getRapportInscription());
 
     }
+
 }

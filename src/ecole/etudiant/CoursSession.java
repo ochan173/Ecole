@@ -1,4 +1,4 @@
-package etudiant;
+package ecole.etudiant;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Olivier Chan
  * @author David Goulet
  */
-class CoursSession {
+public class CoursSession implements Comparable<CoursSession> {
     private String m_departement;
     private String m_numero;
     private ArrayList<Etudiant> m_etudiants = new ArrayList<>();
@@ -21,7 +21,6 @@ class CoursSession {
         m_departement= p_departement;
         m_numero = p_numero;
         m_dateDebut = p_dateDebut;
-        m_compteurCours++;
     }
 
     /**
@@ -33,9 +32,11 @@ class CoursSession {
      * @param p_unite Nombre d'unités d'un cours
      * @return Un cours
      */
-    static CoursSession CreerCoursSession(String p_departement, String p_numero, Date p_dateDebut, int p_unite) {
+    public static CoursSession creerCoursSession(String p_departement, String p_numero, Date p_dateDebut, int p_unite) {
         CoursSession cours = new CoursSession(p_departement, p_numero, p_dateDebut);
         cours.setUnite(p_unite);
+        m_compteurCours++;
+
         return cours;
     }
 
@@ -43,19 +44,19 @@ class CoursSession {
         this.m_unite = p_unite;
     }
 
-    ArrayList<Etudiant> getTousEtudiants() {
+    public ArrayList<Etudiant> getTousEtudiants() {
         return m_etudiants;
     }
 
-    String getDepartement() {
+    public String getDepartement() {
         return  m_departement;
     }
 
-    String getNumero() {
+    public String getNumero() {
         return m_numero;
     }
 
-    int getNbEleves() {
+    public int getNbEleves() {
         return  m_etudiants.size();
     }
 
@@ -63,7 +64,7 @@ class CoursSession {
      * Méthode pour inscrire un étudiant à un cours
      * @param p_etudiant Étudiant à inscrire
      */
-    void inscrire(Etudiant p_etudiant) {
+    public void inscrire(Etudiant p_etudiant) {
         p_etudiant.ajouterUnites(m_unite);
         m_etudiants.add(p_etudiant);
     }
@@ -82,4 +83,15 @@ class CoursSession {
      * Méthode pour réinitaliser le compteur de cours
      */
     static void reinitialiserCptCours() { m_compteurCours = 0; }
+
+    @Override
+    public int compareTo(CoursSession p_cours) {
+        int compareDepartement = this.getDepartement().compareTo(p_cours.getDepartement());
+
+        if (compareDepartement != 0) {
+            return compareDepartement;
+        }
+
+        return this.getNumero().compareTo(p_cours.getNumero());
+    }
 }

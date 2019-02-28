@@ -1,9 +1,11 @@
-package etudiant;
+package ecole.etudiant;
 
 import junit.framework.TestCase;
 import java.util.Calendar;
 import java.util.Date;
-import static etudiant.DateUtil.creerDate;
+import java.util.GregorianCalendar;
+
+import static ecole.etudiant.DateUtil.creerDate;
 
 /**
  * Classe pour la création d'une date
@@ -18,7 +20,7 @@ public class TestDateUtil extends TestCase {
      */
     public void testCreer() {
         Date date = creerDate(2019, 2, 14);
-        Calendar calendar = Calendar.getInstance();
+        Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);
 
         assertEquals(2019, calendar.get(Calendar.YEAR));
