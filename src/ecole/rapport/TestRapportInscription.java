@@ -18,7 +18,7 @@ public class TestRapportInscription extends TestCase {
      * Tests pour un rapport d'inscription
      */
     public void testRapportInscription() {
-        CoursSession coursSession = CoursSession.creerCoursSession("Philo", "101", creerDate(2019, 2, 7), 3);
+        CoursSession coursSession = CoursSession.creer("Philo", "101", creerDate(2019, 2, 7));
 
         Etudiant etudiant1 = new Etudiant("Arianne f.", 9, "FR");
         Etudiant etudiant2 = new Etudiant("Paul n.", 6, "CA");

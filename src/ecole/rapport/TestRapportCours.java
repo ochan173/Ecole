@@ -14,11 +14,11 @@ public class TestRapportCours extends TestCase {
     public void testRapport() {
         final Date date = DateUtil.creerDate(2019,2, 20);
         RapportCours rapport = new RapportCours();
-        rapport.ajouter(CoursSession.creerCoursSession("Francais", "101", date, 2));
-        rapport.ajouter(CoursSession.creerCoursSession("Math", "301", date, 3));
-        rapport.ajouter(CoursSession.creerCoursSession("Philo", "301", date, 4));
-        rapport.ajouter(CoursSession.creerCoursSession("Math", "201", date, 4));
-        rapport.ajouter(CoursSession.creerCoursSession("Philo", "201", date, 4));
+        rapport.ajouter(CoursSession.creer("Francais", "101", date));
+        rapport.ajouter(CoursSession.creer("Math", "301", date));
+        rapport.ajouter(CoursSession.creer("Philo", "301", date));
+        rapport.ajouter(CoursSession.creer("Math", "201", date));
+        rapport.ajouter(CoursSession.creer("Philo", "201", date));
 
         assertEquals("Francais 101" + SAUT_LIGNE +
                 "Math 201" + SAUT_LIGNE +

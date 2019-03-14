@@ -1,14 +1,14 @@
 package ecole.etudiant;
 
-public class StrategiePointageDifficile implements StrategiePointage {
+public class StrategiePointageDifficile extends StrategiePointageBase {
     @Override
     public int getNombrePointsPourNote(Etudiant.Note p_note) {
-        switch (p_note) {
-            case  A : return 5;
-            case  B : return 4;
-            case  C : return 3;
-            case  D : return  2;
-                default: return 0;
+        int points = super.getNombrePointsPourNote(p_note);
+
+        if (points > 0) {
+            points += 1;
         }
+
+        return points;
     }
 }

@@ -10,7 +10,23 @@ import java.util.List;
  * @author David Goulet
  */
 public class Etudiant {
-    enum Note { A, B, C, D, E }
+    enum Note {
+        A(4),
+        B(3),
+        C(2),
+        D(1),
+        E(0);
+
+        private int m_points;
+        Note (int p_points) {
+            m_points = p_points;
+        }
+
+        int getPoints() {
+            return m_points;
+        }
+    }
+
     static final int UNITEE_POUR_TEMPS_PLEIN = 9;
     private String m_nom;
     private int m_nbUnites;

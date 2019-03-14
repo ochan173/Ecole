@@ -12,61 +12,32 @@ import static ecole.etudiant.DateUtil.creerDate;
  * @author Olivier Chan
  * @author David Goulet
  */
-public class TestCoursSession extends TestCase {
-    private CoursSession m_coursSession;
-    private Date m_date;
-
-    /**
-     * Classe pour initialiser les variable avant les tests
-     */
-    public void setUp() {
-        CoursSession.reinitialiserCptCours();
-        m_date = creerDate(2019, 2, 7);
-        m_coursSession = CoursSession.creerCoursSession("Philo", "101", m_date,3);
-    }
-
-    /**
-     * Série de tests pour la création d'un cours
-     */
-    public void testCreer() {
-        assertEquals("Philo", m_coursSession.getDepartement());
-        assertEquals("101", m_coursSession.getNumero());
-        assertEquals(m_date, m_coursSession.getDateDebut());
-
-        assertEquals(0, m_coursSession.getNbEleves());
-
-    }
-
+public class TestCoursSession extends TestCours {
     /**
      * Série de tests pour le nombre de cours ajoutés
      */
     public void testNombreCours() {
-        assertEquals(1, m_coursSession.getNbCours());
-        m_coursSession =  CoursSession.creerCoursSession("Francais", "102", m_date, 4);
-        assertEquals(2, m_coursSession.getNbCours());
+        CoursSession.reinitialiserCptCours();
+        Date dateDebut = DateUtil.creerDate(2019, 3, 14);
+
+        assertEquals(0, CoursSession.getCompteur());
+        CoursSession.creer("Francais", "102", dateDebut);
+        assertEquals(1,CoursSession.getCompteur());
 
         CoursSession.reinitialiserCptCours();
-        assertEquals(0, m_coursSession.getNbCours());
+        assertEquals(0, CoursSession.getCompteur());
     }
 
-    /**
-     * Série de tests pour inscrire un étudiant à des cours
-     */
-    public void testInscrireEtudiant() {
-        CoursSession coursMath = CoursSession.creerCoursSession("Math", "101", m_date, 2);
-        Etudiant etudiant1 = new Etudiant("Olivier Chan", 12, "CA");
-        assertEquals(12, etudiant1.getNbUnites());
-        coursMath.inscrire(etudiant1);
-        assertEquals(14, etudiant1.getNbUnites());
+    public void testDateFin() {
+        Date dateDebut = DateUtil.creerDate(2019, 3, 14);
+        Cours cours = creerCours("Philo", "101", dateDebut);
+        Date dateQuinzeSemaines = DateUtil.creerDate(2019, 6, 28);
 
-        assertEquals(etudiant1, coursMath.getEtudiant(0));
+        assertEquals(dateQuinzeSemaines, cours.getDateFinSession());
+    }
 
-        Etudiant etudiant2 = new Etudiant("Patrick n.", 9, "US");
-        coursMath.inscrire(etudiant2);
-        assertEquals(2, coursMath.getNbEleves());
-        assertEquals(etudiant1, coursMath.getEtudiant(0));
-        assertEquals(etudiant2, coursMath.getEtudiant(1));
-
-
+    protected Cours creerCours(String p_departement, String p_numero, Date p_dateDebut) {
+        Cours coursSession = CoursSession.creer(p_departement, p_numero, p_dateDebut);
+        return coursSession;
     }
 }

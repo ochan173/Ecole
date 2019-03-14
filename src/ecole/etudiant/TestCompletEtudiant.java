@@ -14,7 +14,10 @@ public class TestCompletEtudiant extends TestCase {
         TestSuite testSuite = new TestSuite();
         testSuite.addTestSuite(TestEtudiant.class);
         testSuite.addTestSuite(TestCoursSession.class);
+        testSuite.addTestSuite(TestCoursEte.class);
         testSuite.addTestSuite(TestDateUtil.class);
+        testSuite.addTestSuite(TestStrategiePoints.class);
+        testSuite.addTestSuite(TestStrategiePointsDifficile.class);
         return testSuite;
     }
     }
