@@ -39,7 +39,7 @@ class RapportInscription {
         StringBuilder builder = new StringBuilder();
         builder.append(ENTETE_RAPPORT_INSCRIPTION);
         for (Etudiant etudiant: m_coursSession.getTousEtudiants()) {
-            builder.append(etudiant.getNom());
+            builder.append(etudiant.getNomComplet());
             builder.append(SAUT_LIGNE);
         }
 

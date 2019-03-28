@@ -23,12 +23,17 @@ public class DateUtil {
      */
      public static Date creerDate(int p_annee, int p_mois, int p_jour) {
         GregorianCalendar calendrier = new GregorianCalendar();
+        calendrier.setLenient(false);
         calendrier.clear();
 
-        calendrier.set(Calendar.YEAR, p_annee);
-        calendrier.set(Calendar.MONTH, p_mois);
-        calendrier.set(Calendar.DAY_OF_MONTH, p_jour);
-
-        return calendrier.getTime();
+        try {
+            calendrier.set(Calendar.YEAR, p_annee);
+            calendrier.set(Calendar.MONTH, p_mois);
+            calendrier.set(Calendar.DAY_OF_MONTH, p_jour);
+            return calendrier.getTime();
+        }
+        catch (IllegalArgumentException e) {
+            throw new FormatDateCoursException("Date invalide");
+        }
     }
 }

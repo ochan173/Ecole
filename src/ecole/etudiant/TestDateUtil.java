@@ -27,4 +27,14 @@ public class TestDateUtil extends TestCase {
         assertEquals(2, calendar.get(Calendar.MONTH));
         assertEquals(14, calendar.get(Calendar.DAY_OF_MONTH));
     }
+
+    public void testDateInvalide() {
+        try {
+            Date date = creerDate(2019, 200, 14);
+            fail("Date invalide");
+        }
+        catch (FormatDateCoursException e) {
+
+        }
+    }
 }

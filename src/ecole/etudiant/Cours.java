@@ -1,9 +1,9 @@
 package ecole.etudiant;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
+import java.util.*;
 
 /**
  * Classe d'un cours d'une session
@@ -11,17 +11,23 @@ import java.util.GregorianCalendar;
  * @author Olivier Chan
  * @author David Goulet
  */
-abstract class Cours implements Comparable<Cours> {
+abstract class Cours implements Comparable<Cours>, Iterable<Etudiant> {
     private String m_departement;
     private String m_numero;
     private ArrayList<Etudiant> m_etudiants = new ArrayList<>();
     private Date m_dateDebut;
     private int m_unite;
+    private URL m_url;
 
-    protected Cours(String p_departement, String p_numero, Date p_dateDebut) {
+    Cours(String p_departement, String p_numero, Date p_dateDebut) {
         m_departement= p_departement;
         m_numero = p_numero;
         m_dateDebut = p_dateDebut;
+    }
+
+    @Override
+    public Iterator<Etudiant> iterator() {
+        return m_etudiants.iterator();
     }
 
     public void setNbUnite(int p_unite) {
@@ -72,6 +78,26 @@ abstract class Cours implements Comparable<Cours> {
         return this.getNumero().compareTo(p_cours.getNumero());
     }
 
+    double getMoyenneEleveTempsPartiel() {
+        int cptElevesTempsPartiels = 0;
+        double totalNotes = 0.0;
+
+        if (getNbEleves() == 0) {
+            return  0.0;
+        }
+
+        for (Etudiant e : m_etudiants) {
+            if (!e.estTempsPlein()) {
+                for (Etudiant.Note note : e.getNotes()) {
+                    totalNotes += note.getPoints();
+                }
+                cptElevesTempsPartiels++;
+            }
+        }
+        totalNotes /= cptElevesTempsPartiels;
+        return totalNotes;
+    }
+
     abstract protected int getDureeSession();
 
     Date getDateFinSession() {
@@ -81,5 +107,13 @@ abstract class Cours implements Comparable<Cours> {
         calendar.add(Calendar.DAY_OF_YEAR, getDureeSession() * 7);
 
         return  calendar.getTime();
+    }
+
+    public URL getUrl() {
+        return m_url;
+    }
+
+    public void setUrl(String p_url) throws MalformedURLException {
+        m_url = new URL(p_url);
     }
 }

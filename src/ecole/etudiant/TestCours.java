@@ -2,7 +2,10 @@ package ecole.etudiant;
 
 import junit.framework.TestCase;
 
+import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static ecole.etudiant.DateUtil.creerDate;
 
@@ -56,5 +59,67 @@ abstract class TestCours extends TestCase {
         assertEquals(2, coursMath.getNbEleves());
         assertEquals(etudiant1, coursMath.getEtudiant(0));
         assertEquals(etudiant2, coursMath.getEtudiant(1));
+    }
+
+    public void testMoyenneElevesTempsPartiel() {
+        Cours coursMath = creerCours("Math", "101", m_date);
+        assertEquals(0.0, coursMath.getMoyenneEleveTempsPartiel());
+
+        Etudiant etudiant1 = new Etudiant("Olivier Chan", 12, "CA");
+        etudiant1.ajouterNote(Etudiant.Note.A);
+        Etudiant etudiant2 = new Etudiant("David Goulet", 5, "CA");
+        etudiant2.ajouterNote(Etudiant.Note.B);
+        Etudiant etudiant3 = new Etudiant("Axel Berg", 3, "CA");
+        etudiant3.ajouterNote(Etudiant.Note.C);
+
+        etudiant1.setStrategiePointage(new StrategiePointageBase());
+        etudiant2.setStrategiePointage(new StrategiePointageBase());
+        etudiant3.setStrategiePointage(new StrategiePointageBase());
+
+        coursMath.inscrire(etudiant1);
+        coursMath.inscrire(etudiant2);
+        coursMath.inscrire(etudiant3);
+
+        assertEquals(2.5, coursMath.getMoyenneEleveTempsPartiel());
+        etudiant2.ajouterNote(Etudiant.Note.A);
+        assertEquals(4.5, coursMath.getMoyenneEleveTempsPartiel());
+    }
+
+    public void testIterable() {
+        List<Etudiant> etudiants = new ArrayList<>();
+
+        Cours coursMath = creerCours("Math", "101", m_date);
+
+        Etudiant etudiant1 = new Etudiant("Olivier Chan", 12, "CA");
+        Etudiant etudiant2 = new Etudiant("David Goulet", 5, "CA");
+        Etudiant etudiant3 = new Etudiant("Axel Berg", 3, "CA");
+
+        coursMath.inscrire(etudiant1);
+        coursMath.inscrire(etudiant2);
+        coursMath.inscrire(etudiant3);
+
+        for (Etudiant e : coursMath) {
+            etudiants.add(e);
+        }
+
+        assertEquals(coursMath.getTousEtudiants(), etudiants);
+    }
+
+    public void testUrl() throws MalformedURLException {
+        final String url = "http://www.cstjean.qc.ca";
+        m_cours.setUrl(url);
+        assertEquals(url, m_cours.getUrl().toString());
+    }
+
+    public void testUrlInvalide() {
+        final String url = "????**//ww.cstjean.qc.ca";
+
+        try {
+            m_cours.setUrl(url);
+            fail("Mauvais format de url");
+        }
+        catch (MalformedURLException p_reussite) {
+            //Réussite
+        }
     }
 }

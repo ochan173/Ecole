@@ -28,7 +28,10 @@ public class Etudiant {
     }
 
     static final int UNITEE_POUR_TEMPS_PLEIN = 9;
+    private String m_nomComplet;
     private String m_nom;
+    private String m_prenom;
+    private String m_deuxiemeNom;
     private int m_nbUnites;
     private String m_pays;
     private List<Note> m_notes = new ArrayList<>();
@@ -42,13 +45,14 @@ public class Etudiant {
      * @param p_pays Pays d'origine de l'étudiant
      */
        public Etudiant(String p_nom, int p_nbUnites, String p_pays) {
-        m_nom = p_nom;
+        m_nomComplet = p_nom;
+        diviserNomComplet(p_nom);
         m_nbUnites = p_nbUnites;
         m_pays = p_pays;
     }
 
-    public String getNom() {
-        return m_nom;
+    public String getNomComplet() {
+        return m_nomComplet;
     }
 
     /**
@@ -75,6 +79,10 @@ public class Etudiant {
         m_notes.add(p_note);
     }
 
+    List<Note> getNotes() {
+        return m_notes;
+    }
+
     void setStrategiePointage(StrategiePointage p_strategiePointage) {
         m_strategiePointage = p_strategiePointage;
     }
@@ -90,5 +98,19 @@ public class Etudiant {
         }
 
         return total / m_notes.size();
+    }
+
+    private void diviserNomComplet(String p_nomComplet) {
+        String[] separe = p_nomComplet.split(" ");
+        if (separe.length > 3 || separe.length < 2) {
+            throw new FormatNomEtudiantException("Format du nom invalide");
+        }
+
+        m_prenom = separe[0];
+        m_nom = separe[1];
+
+        if (separe.length == 3) {
+            m_deuxiemeNom = separe[2];
+        }
     }
 }

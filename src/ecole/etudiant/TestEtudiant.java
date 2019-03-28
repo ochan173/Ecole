@@ -2,8 +2,6 @@ package ecole.etudiant;
 
 import junit.framework.TestCase;
 
-import java.awt.image.DataBufferDouble;
-
 /**
  * Classe de tests pour un Étudiant
  *
@@ -17,21 +15,33 @@ public class TestEtudiant extends TestCase {
      * Suite de tests pour la création d'un étudiant
      */
     public void testCreer() {
-        String nomEtudiant = "Olivier Chan";
+        String nomEtudiant = "Olivier Chan Weng";
         Etudiant etudiant = new Etudiant(nomEtudiant, 12, "CA");
-        assertEquals(nomEtudiant, etudiant.getNom());
+        assertEquals(nomEtudiant, etudiant.getNomComplet());
         assertTrue(etudiant.estTempsPlein());
         assertTrue(etudiant.estCanadien());
         assertEquals(12, etudiant.getNbUnites());
 
-        String nomEtudiant2 = "Bob";
+        String nomEtudiant2 = "Bob b";
         Etudiant etudiant2 = new Etudiant(nomEtudiant2, 3, "US");
-        assertEquals(nomEtudiant2, etudiant2.getNom());
+        assertEquals(nomEtudiant2, etudiant2.getNomComplet());
         assertFalse(etudiant2.estTempsPlein());
         assertFalse(etudiant2.estCanadien());
         assertEquals(3, etudiant2.getNbUnites());
 
-        assertEquals(nomEtudiant, etudiant.getNom());
+        assertEquals(nomEtudiant, etudiant.getNomComplet());
+    }
+
+    public void testNomInvalide() {
+        String nomEtudiant = "Gabriel Trudeau St Hilaire";
+        try {
+            Etudiant etudiant = new Etudiant(nomEtudiant, 12, "CA");
+            fail("Format du nom invalide");
+        }
+        catch (FormatNomEtudiantException p_reussite) {
+            //Réussite
+            assertEquals("Format du nom invalide", p_reussite.getMessage());
+        }
     }
 
     public void testUnite() {
@@ -44,7 +54,7 @@ public class TestEtudiant extends TestCase {
     }
 
     public  void testMoyenne() {
-        Etudiant etudiant = new Etudiant("David", 3, "CA");
+        Etudiant etudiant = new Etudiant("David Gouet", 3, "CA");
         etudiant.setStrategiePointage(new StrategiePointageBase());
 
         assertEquals(0.0, etudiant.getMoyenne(), TOLERENCE_NOTE);
@@ -64,7 +74,7 @@ public class TestEtudiant extends TestCase {
         assertEquals(2.0, etudiant.getMoyenne(), TOLERENCE_NOTE);
 
 
-        Etudiant etudiant2 = new Etudiant("Alex", 3, "CA");
+        Etudiant etudiant2 = new Etudiant("Alex A", 3, "CA");
         etudiant2.setStrategiePointage(new StrategiePointageDifficile());
         assertEquals(0.0, etudiant2.getMoyenne(), TOLERENCE_NOTE);
 

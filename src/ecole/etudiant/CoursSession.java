@@ -12,9 +12,9 @@ import java.util.Date;
  */
 public class CoursSession extends Cours {
     private static int m_compteurCours = 0;
-    private final int DUREE_SESSION = 15;
+    private static int DUREE_SESSION = 15;
 
-    protected CoursSession(String p_departement, String p_numero, Date p_dateDebut) {
+    CoursSession(String p_departement, String p_numero, Date p_dateDebut) {
         super(p_departement, p_numero, p_dateDebut);
     }
 
